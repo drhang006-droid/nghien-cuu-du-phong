@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BỆNH ÁN NGHIÊN CỨU - Noradrenalin dự phòng tụt HA | Viêm phúc mạc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: center; vertical-align: middle; }
+    input[type="text"], input[type="number"] { width: 100%; text-align: center; border: none; background: transparent; }
+    input:focus { outline: 2px solid #3b82f6; background: white; }
+  </style>
+</head>
+<body class="bg-gray-100 py-8">
+  <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+    <h1 class="text-3xl font-bold text-center text-red-700">BỆNH ÁN NGHIÊN CỨU</h1>
+    <h2 class="text-xl font-semibold text-center text-gray-700 mt-1">Hiệu quả truyền Noradrenalin trước khởi mê dự phòng tụt huyết áp ở bệnh nhân viêm phúc mạc</h2>
+
+    <form id="researchForm" class="mt-10 space-y-10">
+      <!-- Phần 1-9 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">STT</label><input type="text" id="stt" class="w-full border rounded px-3 py-2"></div>
+        <div>
+          <label class="block font-medium">Nhóm <span class="text-red-500">*</span></label>
+          <select id="nhom" class="w-full border rounded px-3 py-2" required>
+            <option value="">Chọn nhóm</option>
+            <option value="Noradrenalin">Nhóm Noradrenalin dự phòng</option>
+            <option value="Chung">Nhóm chứng</option>
+          </select>
+        </div>
+        <div><label class="block font-medium">Họ và tên</label><input type="text" id="hoten" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">MSBA</label><input type="text" id="msba" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Tuổi</label><input type="number" id="tuoi" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Địa chỉ: Xã - Tỉnh</label><input type="text" id="diachi" class="w-full border rounded px-3 py-2"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div><label class="block font-medium">Cân nặng (kg)</label><input type="number" id="cannang" oninput="tinhBMI()" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Chiều cao (cm)</label><input type="number" id="chieucao" oninput="tinhBMI()" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">BMI</label><input type="text" id="bmi" readonly class="w-full border rounded px-3 py-2 bg-gray-100"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">Ngày vào viện</label><input type="date" id="ngayvao" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Ngày PT</label><input type="date" id="ngaypt" class="w-full border rounded px-3 py-2"></div>
+      </div>
+
+      <div>
+        <label class="block font-medium">Chẩn đoán</label>
+        <input type="text" id="chandoan" value="Viêm phúc mạc do" class="w-full border rounded px-3 py-2">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">Phương pháp PT</label><input type="text" id="phuongphap" class="w-full border rounded px-3 py-2"></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block font-medium">ASA</label><input type="text" id="asa" class="w-full border rounded px-3 py-2"></div>
+          <div><label class="block font-medium">Mallampati</label><input type="text" id="mallampati" class="w-full border rounded px-3 py-2"></div>
+        </div>
+      </div>
+
+      <!-- Bệnh kèm theo -->
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Bệnh kèm theo</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div>Tim mạch: <input type="checkbox" id="tha"> THA <input type="checkbox" id="suytim"> Suy tim <input type="checkbox" id="rlnt"> RLNT</div>
+          <div>Hô hấp: <input type="checkbox" id="copd"> COPD <input type="checkbox" id="hen"> Hen PQ <input type="checkbox" id="thuoclao"> Nghiện thuốc lá/thuốc lào</div>
+          <div>NT-CH: <input type="checkbox" id="dtd"> ĐTĐ <input type="checkbox" id="rlmo"> RL mỡ máu <input type="checkbox" id="tuyengiap"> Tuyến giáp</div>
+          <div>Thần kinh: <input type="checkbox" id="tbmn"> TBMN <input type="checkbox" id="sstt"> SSTT</div>
+          <div>Thận TN: <input type="checkbox" id="suythan"> Suy thận <input type="checkbox" id="phidai"> Phì đại TLT</div>
+          <div>Tiêu hóa: <input type="checkbox" id="viemgan"> Viêm gan mãn <input type="checkbox" id="xogan"> Xơ gan <input type="checkbox" id="viemdd"> Viêm DD, ĐT</div>
+          <div>Ung thư: <input type="checkbox" id="ungthu"> Có</div>
+        </div>
+      </div>
+
+      <!-- Khởi mê & thuốc -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">Thời gian nhịn ăn uống (giờ)</label><input type="number" id="nhinan" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Bù dịch trước khởi mê (ml)</label><input type="number" id="budich" class="w-full border rounded px-3 py-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Thuốc co mạch, atropin dùng trong khởi mê</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>Noradrenalin: Số lần <input type="number" id="na_lan" class="w-20 border rounded px-2"> Tổng <input type="text" id="na_tong" class="w-24 border rounded px-2"></div>
+          <div>Atropin: Số lần <input type="number" id="atropin_lan" class="w-20 border rounded px-2"> Tổng <input type="text" id="atropin_tong" class="w-24 border rounded px-2"></div>
+          <div>Ephedrine: Số lần <input type="number" id="ephedrine_lan" class="w-20 border rounded px-2"> Tổng <input type="text" id="ephedrine_tong" class="w-24 border rounded px-2"></div>
+        </div>
+      </div>
+
+      <!-- Bảng huyết động -->
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Thay đổi huyết động trong khởi mê</h3>
+        <div class="overflow-x-auto">
+          <table>
+            <thead class="bg-gray-200">
+              <tr>
+                <th>Thời điểm theo dõi</th>
+                <th>Nhịp tim</th>
+                <th>HATT</th>
+                <th>HATTr</th>
+                <th>HATB</th>
+                <th>SpO₂ (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Bạn điền từng hàng thời điểm vào đây khi dùng form -->
+              <tr><td>Vào phòng mổ</td><td><input id="nt1"></td><td><input id="hatt1"></td><td><input id="hattr1"></td><td><input id="hatb1"></td><td><input id="spo21"></td></tr>
+              <tr><td>Trước khi chạy nor/NaCl (trước tiêm fen 3’)</td><td><input id="nt2"></td><td><input id="hatt2"></td><td><input id="hattr2"></td><td><input id="hatb2"></td><td><input id="spo22"></td></tr>
+              <tr><td>Trước khi tiêm Fentanyl</td><td><input id="nt3"></td><td><input id="hatt3"></td><td><input id="hattr3"></td><td><input id="hatb3"></td><td><input id="spo23"></td></tr>
+              <tr><td>Sau khi tiêm Fentanyl</td><td><input id="nt4"></td><td><input id="hatt4"></td><td><input id="hattr4"></td><td><input id="hatb4"></td><td><input id="spo24"></td></tr>
+              <tr><td>Trước tiêm Propofol</td><td><input id="nt5"></td><td><input id="hatt5"></td><td><input id="hattr5"></td><td><input id="hatb5"></td><td><input id="spo25"></td></tr>
+              <tr><td>Trước tiêm Rocuronium</td><td><input id="nt6"></td><td><input id="hatt6"></td><td><input id="hattr6"></td><td><input id="hatb6"></td><td><input id="spo26"></td></tr>
+              <tr><td>Trước khi đặt NKQ</td><td><input id="nt7"></td><td><input id="hatt7"></td><td><input id="hattr7"></td><td><input id="hatb7"></td><td><input id="spo27"></td></tr>
+              <tr><td>Sau khi đặt NKQ</td><td><input id="nt8"></td><td><input id="hatt8"></td><td><input id="hattr8"></td><td><input id="hatb8"></td><td><input id="spo28"></td></tr>
+              <tr><td>Sau đặt NKQ 1 phút</td><td><input id="nt9"></td><td><input id="hatt9"></td><td><input id="hattr9"></td><td><input id="hatb9"></td><td><input id="spo29"></td></tr>
+              <tr><td>Sau đặt NKQ 2 phút</td><td><input id="nt10"></td><td><input id="hatt10"></td><td><input id="hattr10"></td><td><input id="hatb10"></td><td><input id="spo210"></td></tr>
+              <tr><td>Sau đặt NKQ 3 phút</td><td><input id="nt11"></td><td><input id="hatt11"></td><td><input id="hattr11"></td><td><input id="hatb11"></td><td><input id="spo211"></td></tr>
+              <tr><td>Sau đặt NKQ 4 phút</td><td><input id="nt12"></td><td><input id="hatt12"></td><td><input id="hattr12"></td><td><input id="hatb12"></td><td><input id="spo212"></td></tr>
+              <tr><td>Sau đặt NKQ 5 phút</td><td><input id="nt13"></td><td><input id="hatt13"></td><td><input id="hattr13"></td><td><input id="hatb13"></td><td><input id="spo213"></td></tr>
+              <tr><td>Sau đặt NKQ 10 phút</td><td><input id="nt14"></td><td><input id="hatt14"></td><td><input id="hattr14"></td><td><input id="hatb14"></td><td><input id="spo214"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Phần 15-18 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">Tổng thời gian HATB < 65 mmHg (phút)</label><input type="number" id="tongthoigian" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Số lần HATB < 65 mmHg</label><input type="number" id="solan" class="w-full border rounded px-3 py-2"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block font-medium">Khí máu động mạch - Trước PT</label><input type="text" id="kmd_truoc" class="w-full border rounded px-3 py-2"></div>
+        <div><label class="block font-medium">Khí máu động mạch - Sau PT</label><input type="text" id="kmd_sau" class="w-full border rounded px-3 py-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Các tác dụng không mong muốn</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <label><input type="checkbox" id="ban_do"> Ban đỏ</label>
+          <label><input type="checkbox" id="phu"> Phù</label>
+          <label><input type="checkbox" id="thoatmach"> Thoát mạch tại vị trí truyền Noradrenalin</label>
+          <label><input type="checkbox" id="loan_nhip"> Loạn nhịp</label>
+          <label><input type="checkbox" id="ngoaitamthu"> Ngoại tâm thu</label>
+        </div>
+      </div>
+
+      <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl">
+        📤 GỬI PHIẾU DỮ LIỆU
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function tinhBMI() {
+      const cannang = parseFloat(document.getElementById('cannang').value);
+      const chieucao = parseFloat(document.getElementById('chieucao').value) / 100;
+      if (cannang && chieucao) {
+        document.getElementById('bmi').value = (cannang / (chieucao * chieucao)).toFixed(2);
+      }
+    }
+
+    document.getElementById('researchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('✅ Phiếu đã được thu thập! (Dữ liệu hiện hiển thị trong console để bạn kiểm tra)');
+      console.log("Dữ liệu bệnh án:");
+      const formData = new FormData(this);
+      for (let [key, value] of formData.entries()) {
+        console.log(key + ": " + value);
+      }
+    });
+  </script>
+</body>
+</html>
